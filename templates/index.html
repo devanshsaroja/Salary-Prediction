@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        input[type="number"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Salary Prediction</h1>
+    <form method="POST">
+        <label for="date">Enter Date (dd):</label>
+        <input type="number" id="date" name="date" min="1" max="30" required>
+
+        <label for="month">Enter Month (mm):</label>
+        <input type="number" id="month" name="month" min="1" max="12" required>
+
+        <label for="year">Enter Year (yyyy):</label>
+        <input type="number" id="year" name="year" min="1952" required>
+
+        <input type="submit" value="Predict Salary">
+    </form>
+
+    {% if predicted_salary is not none %}
+        <div class="result">
+            {% if error_message %}
+                <p class="error">{{ error_message }}</p>
+            {% else %}
+                <p>The predicted salary is: <strong>${{ "%.2f"|format(predicted_salary) }}</strong></p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
